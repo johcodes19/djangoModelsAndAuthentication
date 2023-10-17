@@ -8,3 +8,4 @@ class Flight(models.Model):
     duration= models.IntegerField()
     #from here I will create migrations to tell django to take into account the changes I have made in my models and put them in a database
     #to do that, you go to the terminal and type python manage.py makemigrations
+    #then python manage.py migrate
