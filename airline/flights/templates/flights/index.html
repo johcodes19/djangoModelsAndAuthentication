@@ -3,10 +3,7 @@
 {% block body %}    
      <ul>
         {% for flight in flights  %}
-        <li>Origin: {{flight.origin}} </li>
-        <li>Destination: {{flight.destination}}</li>
-        <li>Duration: {{flight.duration}}</li>
-        {%endfor %}
+        <li>From: {{flight.origin}} to: {{flight.destination}} in: {{flight.duration}} minutes.</li>
      </ul>
 
 {% endblock %}
