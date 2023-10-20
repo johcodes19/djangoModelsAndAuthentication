@@ -26,9 +26,23 @@ class Airport(models.Model):
     #then I create the string representation of the Airport object
     def __str__(self):
         return f"{self.city} : ({self.code})"
+    '''With these new changes, including the modified version of Flight class down below, I need to go back to the terminal and run......
+    python manage.py makemigrations,,,,,,and to apply the changes
+    python  manage.py migrate
+    then go back to the shell and run,,,,,,
+    from flights.models import *
+    jfk=Airport(code='JFK', city= 'New York'),,,, this adds data to the airport
+    jfk.save(),,,,, this saves the airport information
+    then you can create the flight like this,,,,
+    f=Flight(destination=lhr, origin=jfk, duration=415)
+    f.save()
+    '''
     
 #I will also change the appearance of the Flight class from how it looked above to what you see below
 class Flight(models.Model):
     origin = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name='departures')
     destination = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name='arrivals')
     duration = models.IntegerField()
+
+    def __str__(self) :
+        return f"{self.id}: {self.origin} to {self.destination} in {self.duration} minutes"
