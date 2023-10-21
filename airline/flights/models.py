@@ -53,7 +53,7 @@ class passenger(models.Model):
     lastname= models.CharField(max_length=64)
     #a passenger will have a many-to-many relationship with flights
     flights= models.ManyToManyField(Flight, blank=True, related_name='passengers')
-
+    #then go to the terminal and make migrations and migrate
     def __str__(self):
         return f'{self.firstname} {self.lastname}'
     
