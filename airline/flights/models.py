@@ -46,3 +46,14 @@ class Flight(models.Model):
 
     def __str__(self) :
         return f"{self.id}: {self.origin} to {self.destination} in {self.duration} minutes"
+
+#adding a class of passenger
+class passenger(models.Model):
+    firstname= models.CharField(max_length=64)
+    lastname= models.CharField(max_length=64)
+    #a passenger will have a many-to-many relationship with flights
+    flights= models.ManyToManyField(Flight, blank=True, related_name='passengers')
+
+    def __str__(self):
+        return f'{self.firstname} {self.lastname}'
+    
