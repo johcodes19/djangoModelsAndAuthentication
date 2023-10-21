@@ -12,5 +12,7 @@ def flight(request, flight_id):
     flight= Flight.objects.get(pk=flight_id)
     #then pass in the flight to a render request for flight.html
     return render(request, 'flights/flight.html',{
-        'flight': flight
+        'flight': flight,
+        'passengers':flight.passengers.all() 
+        #we are saying flight.passengers because passengers is the related name in the many to many relationship with flight class
     })
