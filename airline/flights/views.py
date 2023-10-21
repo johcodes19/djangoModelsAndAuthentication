@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from .models import Flight, Airport, passenger
 
 # Create your views here.
@@ -22,3 +24,5 @@ def book(request, flight_id):
         flight = Flight.objects.get(id=flight_id)
         pasenger= passenger.objects.get(pk=int(request.POST['passenger']))
         pasenger.flights.add(flight)
+        return HttpResponseRedirect(reverse('flight', args=(flight.id)))# means return to the flight view and take that return value and take them there. In this case, the flight.html file
+    
