@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .models import Flight, Airport, passenger
+from .models import Flight, passenger
 
 # Create your views here.
 def index(request):
@@ -15,8 +15,10 @@ def flight(request, flight_id):
     #then pass in the flight to a render request for flight.html
     return render(request, 'flights/flight.html',{
         'flight': flight,
-        'passengers':flight.passengers.all() 
+        'passengers':flight.passengers.all() ,
         #we are saying flight.passengers because passengers is the related name in the many to many relationship with flight class
+        #down here am getting all the passengers who are not on the flight
+        'nonPassengers': passenger.objects.exclude(flights=flight).all()
     })
 
 def book(request, flight_id):
@@ -24,5 +26,5 @@ def book(request, flight_id):
         flight = Flight.objects.get(id=flight_id)
         pasenger= passenger.objects.get(pk=int(request.POST['passenger']))
         pasenger.flights.add(flight)
-        return HttpResponseRedirect(reverse('flight', args=(flight.id,)))# means return to the flight view and take that return value and take them there. In this case, the flight.html file. Note that the flight.id is structured like a tuple... that is indicated with a comma after it
+        return HttpResponseRedirect(reverse('flights:flight', args=(flight.id,)))# means return to the flight view and take that return value and take them there. In this case, the flight.html file. Note that the flight.id is structured like a tuple... that is indicated with a comma after it
     
