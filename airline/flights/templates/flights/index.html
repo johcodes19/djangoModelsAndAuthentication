@@ -3,7 +3,7 @@
 {% block body %}    
      <ul>
         {% for flight in flights  %}
-            <a href="{% url 'flights:flight' %}">
+            <a href="{% url 'flights:flight' flight.id %}">
         <li>From: {{flight.origin}} to: {{flight.destination}} in: {{flight.duration}} minutes.</li>
         </a>
      </ul>
